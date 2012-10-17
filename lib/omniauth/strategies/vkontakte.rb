@@ -52,7 +52,7 @@ module OmniAuth
       def raw_info
         # http://vkontakte.ru/developers.php?o=-17680044&p=Description+of+Fields+of+the+fields+Parameter
         fields = ['uid', 'first_name', 'last_name', 'nickname', 'sex', 'city', 'country', 'online', 'bdate', 'photo', 'photo_big', 'domain']
-        @raw_info ||= access_token.get('/method/getProfiles', :params => { :uid => uid, :fields => fields.join(',') }, :headers => {"Accept-Language" => "ru"}).parsed["response"].first
+        @raw_info ||= access_token.get('/method/users.get', :params => { :uid => uid, :fields => fields.join(',') }, :headers => {"Accept-Language" => "ru"}).parsed["response"].first
       end
 
       ##
