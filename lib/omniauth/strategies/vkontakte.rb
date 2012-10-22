@@ -20,7 +20,9 @@ module OmniAuth
         :token_url     => '/oauth/token',
         :authorize_url => '/oauth/authorize'
       }
-
+      
+      option :fields, ['uid', 'first_name', 'last_name', 'sex', 'city', 'country', 'bdate', 'photo', 'photo_big', 'domain']
+      
       option :access_token_options, {
         :param_name => 'access_token',
       }
@@ -38,7 +40,6 @@ module OmniAuth
           :first_name => raw_info['first_name'],
           :last_name  => raw_info['last_name'],
           :image      => raw_info['photo'],
-          :location   => location,
           :urls       => {
             'Vkontakte' => "http://vk.com/#{raw_info['domain']}"
           }
@@ -72,32 +73,6 @@ module OmniAuth
           end
           params[:scope] ||= DEFAULT_SCOPE
         end
-      end
-
-      private
-
-      # http://vkontakte.ru/developers.php?o=-17680044&p=getCountries
-      def get_country
-        if raw_info['country'] && raw_info['country'] != "0"
-          country = access_token.get('/method/getCountries', :params => { :cids => raw_info['country'] }).parsed['response']
-          return country.first ? country.first['name'] : ''
-        else
-          return ''
-        end
-      end
-
-      # http://vkontakte.ru/developers.php?o=-17680044&p=getCities
-      def get_city
-        if raw_info['city'] && raw_info['city'] != "0"
-          city = access_token.get('/method/getCities', :params => { :cids => raw_info['city'] }).parsed['response']
-          return city.first ? city.first['name'] : ''
-        else
-          return ''
-        end
-      end
-
-      def location
-        @location ||= "#{get_country}, #{get_city}"
       end
 
     end
