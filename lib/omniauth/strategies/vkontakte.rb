@@ -21,7 +21,7 @@ module OmniAuth
         :authorize_url => '/oauth/authorize'
       }
       
-      option :fields, ['uid', 'first_name', 'last_name', 'sex', 'city', 'country', 'bdate', 'photo', 'photo_big', 'domain']
+      option :fields, ['uid', 'first_name', 'last_name', 'sex', 'city', 'country', 'bdate', 'photo', 'photo_max', 'domain']
       
       option :access_token_options, {
         :param_name => 'access_token',
