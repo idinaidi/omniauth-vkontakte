@@ -39,7 +39,7 @@ module OmniAuth
           :nickname   => raw_info['nickname'],
           :first_name => raw_info['first_name'],
           :last_name  => raw_info['last_name'],
-          :image      => raw_info['photo'],
+          :image      => raw_info['photo_max'],
           :urls       => {
             'Vkontakte' => "http://vk.com/#{raw_info['domain']}"
           }
